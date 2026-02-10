@@ -37,3 +37,34 @@ Aplicación web full stack para gestión de tareas con autenticación de usuario
 
 ## 📂 Estructura del proyecto
 
+frontend/
+├─ src/
+│ ├─ pages/
+│ ├─ components/
+│ ├─ api/
+│ └─ App.jsx
+
+backend/
+├─ src/
+│ ├─ routes/
+│ ├─ controllers/
+│ ├─ models/
+│ └─ middlewares/
+
+
+## 🔐 Seguridad
+- Contraseñas hasheadas con bcrypt
+- Autenticación con JWT
+- Rutas protegidas en frontend y backend
+- Variables sensibles en entorno seguro
+
+## ⚙️ Instalación local
+
+```bash
+git clone https://github.com/Maury1011/Frontend-Gestion-Usuarios.git
+
+cd frontend
+npm install
+npm run dev
+
+
