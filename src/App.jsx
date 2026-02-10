@@ -11,8 +11,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
       <Route path="/register" element={<Register />} />
-      <Route
-        path="/tasks"
+      <Route path="/tasks"
         element={isAuth ? <Tasks setIsAuth={setIsAuth} /> : <Navigate to="/login" />}
       />
       <Route

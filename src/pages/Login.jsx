@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { api } from '../api/api';
 import Layout from '../components/Layout';
 
-export default function Login() {
+export default function Login({ setIsAuth }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -16,6 +16,7 @@ export default function Login() {
         try {
             const res = await api.post('/auth/login', { email, password });
             localStorage.setItem('token', res.data.token);
+            setIsAuth(true);
             navigate('/tasks');
         } catch (err) {
             setError(err.response?.data?.message || 'Email o contraseña incorrectos');
@@ -43,7 +44,6 @@ export default function Login() {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
-
                 <input
                     type="password"
                     required
@@ -52,7 +52,6 @@ export default function Login() {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
-
                 <button className="w-full rounded-md bg-blue-600 py-2 text-white hover:bg-blue-700">
                     Entrar
                 </button>
