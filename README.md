@@ -1,16 +1,70 @@
-# React + Vite
+# 📝 Task Manager – Full Stack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web full stack para gestión de tareas con autenticación de usuarios, desarrollada como proyecto de portafolio.
 
-Currently, two official plugins are available:
+## 🚀 Demo
+- Frontend: https://frontend-gestion-usuarios.vercel.app
+- Backend: https://backend-gestion-usuarios-production.up.railway.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧠 Funcionalidades
+- Registro e inicio de sesión (JWT)
+- CRUD completo de tareas
+- Tareas asociadas por usuario
+- Protección de rutas
+- Persistencia de sesión
+- Logout seguro
 
-## React Compiler
+## 🛠️ Stack Tecnológico
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
+- React
+- Vite
+- Tailwind CSS v4
+- Axios
+- React Router
 
-## Expanding the ESLint configuration
+### Backend
+- Node.js
+- Express
+- JWT
+- bcrypt
+- Sequelize
+- PostgreSQL
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Deploy
+- Frontend: Vercel
+- Backend + DB: Railway
+
+## 📂 Estructura del proyecto
+
+frontend/
+├─ src/
+│ ├─ pages/
+│ ├─ components/
+│ ├─ api/
+│ └─ App.jsx
+
+backend/
+├─ src/
+│ ├─ routes/
+│ ├─ controllers/
+│ ├─ models/
+│ └─ middlewares/
+
+
+## 🔐 Seguridad
+- Contraseñas hasheadas con bcrypt
+- Autenticación con JWT
+- Rutas protegidas en frontend y backend
+- Variables sensibles en entorno seguro
+
+## ⚙️ Instalación local
+
+```bash
+git clone https://github.com/Maury1011/Frontend-Gestion-Usuarios.git
+
+cd frontend
+npm install
+npm run dev
+
+
