@@ -7,18 +7,25 @@ import { useNavigate } from 'react-router-dom';
 const Tasks = ({ setIsAuth }) => {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [actionLoading, setActionLoading] = useState(false); // ✅ nuevo
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
-    const loadTasks = async () => {
+    const loadTasks = async (showActionLoading = false) => {
+        if (showActionLoading) setActionLoading(true);
         try {
             const res = await api.get('/tasks');
+
+    //eliminar este bloque cuando el backend esté listo para evitar retrasos innecesarios en producción
+  //  if (import.meta.env.DEV) {await new Promise(resolve => setTimeout(resolve, 1500));}
+
             setTasks(res.data);
         } catch (err) {
             console.error('Error cargando tareas:', err);
             setError('Error al cargar tareas');
         } finally {
             setLoading(false);
+            setActionLoading(false);
         }
     };
 
@@ -49,14 +56,25 @@ const Tasks = ({ setIsAuth }) => {
                     </button>
                 </div>
 
-                <TaskForm onTaskCreated={loadTasks} />
+                <TaskForm onTaskCreated={() => loadTasks(true)} />
+
+                {/* ✅ Mensaje de cargando al añadir/eliminar */}
+                {actionLoading && (
+                    <p className="my-2 text-center text-sm text-blue-500 animate-pulse">
+                        Actualizando tareas…
+                    </p>
+                )}
 
                 <div className="mt-4 space-y-2">
-                    {tasks.length === 0 && (
+                    {tasks.length === 0 && !actionLoading && (
                         <p className="text-center text-slate-500">No hay tareas todavía</p>
                     )}
                     {tasks.map(task => (
-                        <TaskItem key={task.id} task={task} onChange={loadTasks} />
+                        <TaskItem
+                            key={task.id}
+                            task={task}
+                            onChange={() => loadTasks(true)} // ✅ activa el loading al eliminar
+                        />
                     ))}
                 </div>
             </div>
