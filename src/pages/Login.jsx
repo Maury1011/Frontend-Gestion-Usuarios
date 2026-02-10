@@ -12,7 +12,7 @@ export default function Login() {
         setError('');
 
         try {
-        const res = await api.post('/login', { email, password });
+        const res = await api.post('/auth/login', { email, password });
         localStorage.setItem('token', res.data.token);
         location.href = '/tasks';
         } catch {

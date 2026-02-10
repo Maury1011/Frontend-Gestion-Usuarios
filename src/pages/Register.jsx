@@ -12,7 +12,7 @@ export default function Register() {
         setError('');
 
         try {
-        await api.post('/register', { email, password });
+        await api.post('/auth/register', { email, password });
         location.href = '/login';
         } catch {
         setError('No se pudo crear la cuenta');
