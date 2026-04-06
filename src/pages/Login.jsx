@@ -7,11 +7,13 @@ export default function Login({ setIsAuth }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async e => {
         e.preventDefault();
         setError('');
+        setLoading(true);
 
         try {
             const res = await api.post('/auth/login', { email, password });
@@ -20,6 +22,8 @@ export default function Login({ setIsAuth }) {
             navigate('/tasks');
         } catch (err) {
             setError(err.response?.data?.message || 'Email o contraseña incorrectos');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -39,7 +43,8 @@ export default function Login({ setIsAuth }) {
                 <input
                     type="email"
                     required
-                    className="w-full rounded-md border px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+                    disabled={loading}
+                    className="w-full rounded-md border px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
                     placeholder="Correo"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
@@ -47,13 +52,40 @@ export default function Login({ setIsAuth }) {
                 <input
                     type="password"
                     required
-                    className="w-full rounded-md border px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+                    disabled={loading}
+                    className="w-full rounded-md border px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
                     placeholder="Contraseña"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
-                <button className="w-full rounded-md bg-blue-600 py-2 text-white hover:bg-blue-700">
-                    Entrar
+                <button
+                    disabled={loading}
+                    className="flex w-full items-center justify-center gap-2 rounded-md bg-blue-600 py-2 text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                    {loading ? (
+                        <>
+                            <svg
+                                className="h-4 w-4 animate-spin"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+                                <circle
+                                    className="opacity-25"
+                                    cx="12" cy="12" r="10"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                />
+                                <path
+                                    className="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                                />
+                            </svg>
+                            Iniciando sesión...
+                        </>
+                    ) : (
+                        'Entrar'
+                    )}
                 </button>
             </form>
 
