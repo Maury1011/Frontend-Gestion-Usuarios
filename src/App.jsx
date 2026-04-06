@@ -16,7 +16,7 @@ function App() {
       />
       <Route
         path="*"
-        element={<Navigate to={isAuth ? "/tasks" : "/login"} />}
+        element={<Navigate to="/login" />}
       />
     </Routes>
   );
